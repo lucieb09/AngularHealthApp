@@ -1,0 +1,58 @@
+<main class="page">
+  <header class="page-header">
+    <h1>Health Calculator</h1>
+  </header>
+
+  <section class="controls" aria-label="Health profile">
+    <div class="toggle-row">
+      <span>Unit of measure</span>
+      <button type="button" class="toggle-button" (click)="toggleMeasure()">
+        {{ isUsMeasure() ? 'U.S.' : 'Metric' }}
+      </button>
+    </div>
+    <div class="toggle-row">
+      <span>Gender used by the BMR formula</span>
+      <button type="button" class="toggle-button" (click)="toggleGender()">{{ genderLabel }}</button>
+    </div>
+
+    <div class="input-row">
+      <label for="height">Height <span>({{ isUsMeasure() ? 'ft / in' : 'cm' }})</span></label>
+      <div class="slider-labels"><span>{{ heightMinimumLabel() }}</span><span>{{ heightMaximumLabel() }}</span></div>
+      <input id="height" type="range" step="1" [min]="heightMinimum()" [max]="heightMaximum()"
+        [value]="heightValue()" (input)="updateHeight($event)" />
+      <output for="height">{{ heightDescription() }}</output>
+    </div>
+
+    <div class="input-row">
+      <label for="weight">Weight <span>({{ weightMinimum() }}–{{ weightMaximum() }} {{ weightUnit() }})</span></label>
+      <input id="weight" type="number" required [min]="weightMinimum()"
+        [max]="weightMaximum()" [value]="weightDraft()" (input)="updateWeight($event)"
+        #weightInput />
+      <span class="field-error" [hidden]="weightInput.validity.valid">Enter a value in the displayed range.</span>
+    </div>
+
+    <div class="input-row">
+      <label for="age">Age <span>(13–120 years)</span></label>
+      <input id="age" type="number" required min="13" max="120" [value]="ageDraft()"
+        (input)="updateAge($event)" #ageInput />
+      <span class="field-error" [hidden]="ageInput.validity.valid">Enter an age from 13 to 120.</span>
+    </div>
+  </section>
+
+  <section class="results" aria-label="Calculated estimates" aria-live="polite">
+    <article class="tile">
+      <h2>Basal Metabolic Rate</h2>
+      <p class="result-value">{{ bmr() }} <span>Calories/day</span></p>
+    </article>
+    <article class="tile" [class.underweight]="bmiCategory() === 'Underweight'"
+      [class.overweight]="bmiCategory() === 'Overweight'" [class.obese]="bmiCategory() === 'Obese'">
+      <h2>Body Mass Index</h2>
+      <p class="result-value">{{ bmi() }}</p>
+      <p class="category">{{ bmiCategory() }}</p>
+    </article>
+    <article class="tile">
+      <h2>Target Heart Rate <span>(50%–85%)</span></h2>
+      <p class="result-value">{{ targetHeartRate().min }}–{{ targetHeartRate().max }} <span>BPM</span></p>
+    </article>
+  </section>
+</main>

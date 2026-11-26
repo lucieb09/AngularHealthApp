@@ -1,0 +1,33 @@
+:host { display: block; }
+
+.page { max-width: 980px; margin: 0 auto; padding: 2rem 1.25rem 3rem; }
+.page-header { margin-bottom: 1.5rem; }
+.page-header h1 { margin: 0; color: #102a70; font-size: clamp(2rem, 5vw, 2.65rem); }
+.page-header p { margin: 0.5rem 0 0; color: #4b5563; }
+.controls { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.9rem; align-items: start; }
+.toggle-row, .input-row { min-height: 5.25rem; padding: 0.9rem 1rem; border: 1px solid #cbd5e1; border-radius: 0.5rem; background: #fff; }
+.toggle-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.toggle-button { min-width: 5.25rem; padding: 0.55rem 0.75rem; border: 2px solid #102a70; border-radius: 0.35rem; background: #fff; color: #102a70; font-weight: 700; cursor: pointer; }
+.toggle-button:hover, .toggle-button:focus-visible { background: #e8efff; }
+.input-row { display: grid; gap: 0.4rem; }
+.input-row label { font-weight: 700; }
+.input-row label span, .tile h2 span { font-weight: 400; color: #4b5563; }
+.slider-labels { display: flex; justify-content: space-between; color: #4b5563; font-size: 0.875rem; }
+.input-row input[type='number'] { width: min(100%, 12rem); min-height: 2.5rem; padding: 0.35rem 0.5rem; }
+.input-row input[type='range'] { width: 100%; accent-color: #173a8a; }
+.field-error { color: #a40000; font-size: 0.875rem; }
+.field-error[hidden] { display: none; }
+.input-row input:invalid { border: 2px solid #a40000; }
+.results { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+.tile { min-height: 10rem; padding: 1rem; border: 2px solid #102a70; border-radius: 0.5rem; background: lightblue; }
+.tile h2 { margin: 0; color: #102a70; font-size: 1.2rem; }
+.result-value { margin: 1.25rem 0 0.25rem; font-size: 1.65rem; font-weight: 700; }
+.result-value span { font-size: 0.9rem; font-weight: 400; }
+.category { margin: 0; font-weight: 700; }
+.tile.underweight, .tile.overweight { background: lightcoral; }
+.tile.obese { background: #f87171; }
+
+@media (max-width: 700px) {
+  .controls, .results { grid-template-columns: 1fr; }
+  .page { padding: 1.25rem 0.85rem 2rem; }
+}
